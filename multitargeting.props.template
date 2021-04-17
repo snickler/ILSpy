@@ -5,6 +5,6 @@
 <Project>
   <PropertyGroup>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <TargetFrameworks>net472;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net472;net5.0-windows;net6.0-windows</TargetFrameworks>
   </PropertyGroup>
 </Project>
