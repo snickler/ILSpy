@@ -2,9 +2,12 @@
 <Project>
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
+  <Import Project="..\multitargeting.props" Condition="Exists('..\multitargeting.props')" />
+  <PropertyGroup Condition="!Exists('..\multitargeting.props')">
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
     <RootNamespace>ICSharpCode.ILSpy.AddIn</RootNamespace>
 
     <Company>IC#Code</Company>
