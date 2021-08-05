@@ -61,7 +61,7 @@ jobs:
         .\BuildTools\ghactions-install.ps1
         Get-ChildItem Env: | Where-Object {$_.Name -Match "^ILSPY_"} | %{ echo "::set-output name=$($_.Name)::$($_.Value)" }
 
-    - run: cp src/multitargeting.props.template src/multitargeting.props -Force
+    - run: cp multitargeting.props.template multitargeting.props -Force
 
     - name: Restore the application
       run: msbuild ${{ matrix.solution }} /t:Restore /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}
