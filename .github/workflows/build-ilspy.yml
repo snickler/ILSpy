@@ -49,8 +49,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+    - run: $env:Path+=";C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64"
 
     - name: Install dotnet-format
       run: dotnet tool install dotnet-format --global --version 5.1.225507
@@ -63,7 +62,7 @@ jobs:
         Get-ChildItem Env: | Where-Object {$_.Name -Match "^ILSPY_"} | %{ echo "::set-output name=$($_.Name)::$($_.Value)" }
 
     - run: cp src/multitargeting.props.template src/multitargeting.props -Force
-    
+
     - name: Restore the application
       run: msbuild ${{ matrix.solution }} /t:Restore /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}
 
