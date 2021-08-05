@@ -35,8 +35,8 @@ jobs:
       TargetFramework: net5.0-windows
 
     steps:
-    - run: mkdir -p $env:StagingDirectory
-    - run: cp src/multitargeting.props.template src/multitargeting.props
+    - run: mkdir -Force $env:StagingDirectory
+    - run: cp src/multitargeting.props.template src/multitargeting.props -Force
       
     - name: Force git to use crlf, otherwise dotnet-format --check fails
       run: git config --global core.autocrlf true
