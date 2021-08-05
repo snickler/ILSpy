@@ -8,7 +8,7 @@ on:
 
 jobs:
   Build:
-    runs-on: windows-latest
+    runs-on: self-hosted
     strategy:
       fail-fast: false
       matrix:
@@ -36,7 +36,7 @@ jobs:
 
     steps:
     - run: mkdir -p $env:StagingDirectory
-    - run: cp multitargeting.props.template multitargeting.props
+    - run: cp src/multitargeting.props.template src/multitargeting.props
       
     - name: Force git to use crlf, otherwise dotnet-format --check fails
       run: git config --global core.autocrlf true
