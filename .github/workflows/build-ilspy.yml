@@ -49,7 +49,6 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-    - run: $env:Path+=";C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64"
 
     - name: Install dotnet-format
       run: dotnet tool install dotnet-format --global --version 5.1.225507
@@ -64,10 +63,14 @@ jobs:
     - run: cp multitargeting.props.template multitargeting.props -Force
 
     - name: Restore the application
-      run: msbuild ${{ matrix.solution }} /t:Restore /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}
+      run: |
+        $env:Path+=";C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64"
+        msbuild ${{ matrix.solution }} /t:Restore /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}
 
     - name: Build
-      run: msbuild ${{ matrix.solution }} /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /p:AppxPackageDir="${{ github.workspace }}\${{ env.StagingDirectory }}\${{ matrix.channel }}\" 
+      run: |
+        $env:Path+=";C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64"
+        msbuild ${{ matrix.solution }} /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /p:AppxPackageDir="${{ github.workspace }}\${{ env.StagingDirectory }}\${{ matrix.channel }}\" 
       env:
         ReleaseChannel: ${{ matrix.channel }}
 
